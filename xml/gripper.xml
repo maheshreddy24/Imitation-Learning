@@ -1,0 +1,81 @@
+<mujoco>
+
+  <option integrator="RK4" viscosity="1" timestep="0.01"/>
+
+  <size memory="1G"/>
+
+  <visual>
+    <headlight diffuse=".2 .2 .2"/>
+  </visual>
+
+  <default>
+    <joint damping=".1" axis="0 1 0"/>
+  </default>
+<!--
+  <contact>
+    <exclude body1="arm2" body2="cube"/>
+  </contact>
+-->
+
+  <worldbody>
+    <light pos="0.4 -.15 .6" dir="-1 .5 -1" diffuse=".7 .7 .7"/>
+    <light pos="-.4 -.15 .6" dir="1 .5 -1" diffuse=".7 .7 .7"/>
+
+
+    <body name="table" pos= "-.05 0 .3" euler="0 0 0">
+      <geom type='box' pos = "0.05 0.2 -0.05" size="0.4 0.4 0.005" rgba="1 1 1 1"/>
+    </body>
+    <body name="cube" euler="0 0 0">
+      <joint type="slide" name="slider_1" axis="1 0 0"/>
+      <joint type="slide" name="slider_2" axis="0 1 0"/>
+      <geom type="box" name="cube" pos = "0 0.15 0.3" size="0.04 0.04 0.04" rgba="0.2 0.3 1 1"/>
+    </body>
+    <body name="arm1" pos="-.05 0 .3" euler="90 0 0" >
+      <joint name="arm1"/>
+      <geom type="cylinder" size=".015 .05" zaxis="0 1 0" rgba="0 0 0 1"/>
+      <geom type="capsule" size=".01" fromto="0 0 0 -.12 0 -.07" rgba="1 0.2 0.2 1"/>
+      <body name="arm2" pos="-.12 0 -.07">
+        <joint name="arm2"/>
+        <geom type="cylinder" size=".015 .01" zaxis="0 1 0" rgba="0 0 0 1"/>
+        <geom type="capsule" size=".01" fromto="0 0 0 .12 0 -.07" rgba="1 0.2 0.2 1"/>
+        
+        <body name = "end_effector_1" pos="0.12 0 -.07">
+          <geom type = "sphere" size = "0.015" rgba = "0 0 0 1"/>
+        </body>
+
+      </body>
+
+    </body>
+    <body name="arm3" pos=".05 0 .3" euler="270 180 0" >
+      <joint name="arm3"/>
+      <geom type="cylinder" size=".015 .05" zaxis="0 1 0" rgba="0 0 0 1"/>
+      <geom type="capsule" size=".01" fromto="0 0 0 -.12 0 -.07" rgba="1 0.2 0.2 1"/>
+      <body name="arm4" pos="-.12 0 -.07">
+        <joint name="arm4"/>
+        <geom type="cylinder" size=".015 .01" zaxis="0 1 0" rgba="0 0 0 1"/>
+        <geom type="capsule" size=".01" fromto="0 0 0 .12 0 -.07" rgba="1 0.2 0.2 1"/>
+        
+        <body name = "end_effector_2" pos="0.12 0 -.07">
+          <geom type = "sphere" size = "0.015" rgba = "0 0 0 1"/>
+        </body>
+
+      </body>
+    </body>
+
+  <!-- <equality>
+    <joint joint1="arm1" joint2="arm2" polycoef="0 -.5 0 0 0"/>
+  </equality> -->
+</worldbody>
+  <actuator>
+    <position name="arm1" joint="arm1" ctrlrange="-.8 1" ctrllimited="true" kp="10"/>
+    <position name="arm2" joint="arm2" ctrlrange="-.8 1" ctrllimited="true" kp="10"/>
+    <position name="arm3" joint="arm3" ctrlrange="-.8 1" ctrllimited="true" kp="10"/>
+    <position name="arm4" joint="arm4" ctrlrange="-.8 1" ctrllimited="true" kp="10"/>
+    <position name="box_slide_1" joint="slider_1" ctrlrange="-10 10" ctrllimited="true" kp="100"/>
+    <position name="box_slide_2" joint="slider_2" ctrlrange="-10 10" ctrllimited="true" kp="100"/>
+  </actuator>
+  <equality>
+    <connect body1="end_effector_1" body2="cube" anchor="0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+    <connect body1="end_effector_2" body2="cube" anchor="0 0 0" solimp="0.95 0.99 0.001" solref="0.005 1"/>
+  </equality>
+</mujoco>
