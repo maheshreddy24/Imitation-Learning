@@ -58,10 +58,4 @@ The primary goal of this project is to improve the capabilities of a two-finger 
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
-## Acknowledgements
 
-We would like to thank all the contributors and the community for their support and feedback.
-
----
-
-Feel free to customize this README file further to fit the specific details and preferences of your project. If you need any additional information or modifications, please let me know!
