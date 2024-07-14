@@ -1,4 +1,4 @@
-Here's a comprehensive README file for your project on GitHub:
+
 
 # DAgger (Dataset Aggregation)
 
