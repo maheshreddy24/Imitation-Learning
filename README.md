@@ -1,61 +1,58 @@
+DAgger (Dataset Aggregation)
 
+DAgger (Dataset Aggregation) is an advanced imitation learning algorithm that iteratively refines a policy by leveraging an expert policy. This method is particularly useful in cases where direct supervised learning from an expert is insufficient due to compounding errors in long-horizon tasks.
 
-# DAgger (Dataset Aggregation)
+In this project, DAgger is utilized to enhance the performance of a two-finger robotic gripper, which is controlled by four process parameters (joint angles). The expert policy, implemented as a neural network, provides high-accuracy demonstrations, and the trained policy learns from the expert through iterative dataset aggregation.
 
-DAgger (Dataset Aggregation) is an imitation learning technique that uses an expert policy to train a new policy. Both the expert policy and the trained policy are implemented using Neural Networks. The expert policy achieves a mean squared error (MSE) of less than 0.001 radians and was trained on 4 million state-action pairs. The primary goal of this project is to enhance the capabilities of a two-finger gripper controlled by four process parameters (joint angles).
+Project Structure
 
-## Project Structure
+imitation_learning.py - Implements the DAgger algorithm, including training and dataset aggregation.
 
-- `imitation_learning.py`: This file contains the training of the policy (Neural Network) and the aggregation of the dataset.
-- `fingers.py`: This file includes necessary utilities for training the policy, including the architectures of the expert and trained policies.
-- `XML/`: This folder consists of the model XML file.
+fingers.py - Contains utility functions and neural network architectures for the expert and trained policies.
 
-## Installation
+XML/ - Includes the XML model file for simulating the two-finger gripper.
 
-To get started with this project, clone the repository and install the required dependencies.
+Installation
 
-```bash
+To set up the project, clone the repository and install the required dependencies:
+
 git clone https://github.com/yourusername/DAgger.git
 cd DAgger
 pip install -r requirements.txt
-```
 
-## Usage
+Usage
 
-### Training the Policy
+Training the Policy
 
-To train the policy using the imitation learning approach, run the `imitation_learning.py` script.
+To train the policy using the DAgger approach, run the imitation_learning.py script:
 
-```bash
 python imitation_learning.py
-```
 
-This script performs the following tasks:
-- Loads the expert policy and the initial dataset.
-- Trains the neural network policy using the dataset.
-- Aggregates the dataset by incorporating the trained policy.
+This script performs the following steps:
 
-### Utilities and Architectures
+Loads the expert policy and initializes the dataset.
 
-The `fingers.py` file includes necessary utilities for training the policy, such as:
-- Definition of the neural network architectures for both the expert and trained policies.
-- Functions to preprocess data and evaluate policies.
+Trains the initial policy using the dataset.
 
-### Model Files
+Iteratively refines the policy by incorporating expert-labeled corrections into the dataset.
 
-The `XML` folder contains the model XML file required for simulating the two-finger gripper.
+Updates the trained policy with the aggregated dataset.
 
-## Expert Policy
+Utilities and Architectures
 
-The expert policy is a neural network trained to achieve a mean squared error (MSE) of less than 0.001 radians. It was trained on 4 million state-action pairs, providing a robust foundation for training the new policy.
+The fingers.py file contains:
 
-## Goal
+Neural Network Architectures: Defines both the expert policy and the trained policy.
 
-The primary goal of this project is to improve the capabilities of a two-finger gripper, which is controlled by four process parameters (joint angles). By leveraging imitation learning, we aim to train a policy that can effectively control the gripper with high precision.
+Data Preprocessing Functions: Prepares state-action pairs for training.
 
+Evaluation Functions: Measures policy performance against the expert policy.
 
-## License
+Model Files
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+The XML/ folder contains the simulation model for the two-finger gripper, which is required for training and evaluation in a simulated environment.
 
+Expert Policy
+
+The expert policy is a neural network trained to achieve an MSE of less than 0.001 radians. It was trained on a dataset of 4 million state-action pairs, making it highly reliable for providing ground-truth actions.
 
